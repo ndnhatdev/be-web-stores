@@ -10,14 +10,15 @@ import java.util.Set;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "roles")
-public class Roles {
+@Table(name = "role_tbl")
+public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
     String name;
+    String description;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Set<Users> users;
+    Set<User> users;
 }

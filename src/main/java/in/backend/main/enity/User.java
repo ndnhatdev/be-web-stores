@@ -11,12 +11,12 @@ import java.util.Set;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "users")
-public class Users {
+@Table(name = "user_tbl")
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
 
     @Column(unique = true, nullable = false)
     String username;
@@ -30,9 +30,9 @@ public class Users {
 
     @ManyToMany(fetch = FetchType.LAZY)
             @JoinTable(
-                    name = "users_role",
-                    joinColumns = @JoinColumn(name = "users_id"),
-                    inverseJoinColumns = @JoinColumn(name = "roles_id")
+                    name = "user_role",
+                    joinColumns = @JoinColumn(name = "user_id"),
+                    inverseJoinColumns = @JoinColumn(name = "role_id")
             )
-    Set<Roles> roles;
+    Set<Role> roles;
 }
