@@ -12,7 +12,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -34,5 +34,5 @@ public class User {
                     joinColumns = @JoinColumn(name = "users_id"),
                     inverseJoinColumns = @JoinColumn(name = "roles_id")
             )
-    Set<Role> roles;
+    Set<Roles> roles;
 }
