@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface IUserMapper {
     User toUser(UserCreationRequest userCreationRequest);
 
     UserResponse toUserResponse(User user);
