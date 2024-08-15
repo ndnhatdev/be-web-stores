@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class User {
     String email;
     @Column(name = "create_at")
     LocalDateTime createAt;
+    LocalDateTime updateAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
             @JoinTable(
@@ -35,4 +37,14 @@ public class User {
                     inverseJoinColumns = @JoinColumn(name = "role_id")
             )
     Set<Role> roles;
+
+    @PrePersist
+    protected void onCreate() {
+        createAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateAt = LocalDateTime.now();
+    }
 }

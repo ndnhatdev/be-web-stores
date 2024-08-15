@@ -1,7 +1,13 @@
 package in.backend.main.repository;
 
-import in.backend.main.enity.User;
+import in.backend.main.entity.Users;
+import jdk.jfr.Registered;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UsersRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
+
+@Repository
+public interface UsersRepository extends JpaRepository<Users, Long> {
+    Optional<Users> findByUserName(String username);
 }

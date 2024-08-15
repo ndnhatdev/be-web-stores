@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleRequestDTO {
+public class RoleRequest {
     String name;
     String description;
 }
