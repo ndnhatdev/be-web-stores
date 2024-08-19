@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IUserRepository extends IGeneralService<User, String>, JpaRepository<User, String> {
+public interface IUserRepository extends JpaRepository<User, String> {
     Optional<User> findByUsername(String username);
 }
