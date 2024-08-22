@@ -1,6 +1,8 @@
 package in.backend.main.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import in.backend.main.dto.response.ApiResponse;
+import in.backend.main.exception.ErrorCode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,11 +17,19 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        ErrorCode errorCode = ErrorCode.UNAUTHENTICATED;
+
+        response.setStatus(errorCode.getHttpStatus().value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
+        ApiResponse<?> apiResponse = ApiResponse.builder()
+                .code(errorCode.getHttpStatus().value())
+                .message(errorCode.getMessage())
+                .build();
+
         ObjectMapper mapper = new ObjectMapper();
-        response.getWriter().write(mapper.writeValueAsString(authException));
+
+        response.getWriter().write(mapper.writeValueAsString(apiResponse));
         response.flushBuffer();
     }
 }

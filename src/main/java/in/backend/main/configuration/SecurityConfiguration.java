@@ -22,21 +22,21 @@ import org.springframework.web.filter.CorsFilter;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     private final String[] PUBLIC_ENDPOINTS = {
-            "/users", "/auth/token", "/auth/introspect"
+            "/users", "/auth/token", "/auth/introspect", "/hello"
     };
 
     @Autowired
     private CustomJwtDecoder jwtDecoder;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomJwtDecoder customJwtDecoder, JwtAuthenticationConverter getJwtAuthenticationConverter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
                 .permitAll()
                 .anyRequest()
                 .authenticated());
 
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
-                .decoder(customJwtDecoder)
+                .decoder(jwtDecoder)
                 .jwtAuthenticationConverter(getJwtAuthenticationConverter()))
                 .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
 
