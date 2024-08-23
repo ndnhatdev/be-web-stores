@@ -3,8 +3,6 @@ package in.backend.main.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +11,4 @@ import java.util.Set;
 public class UserUpdateRequest {
     String firstName;
     String lastName;
-    String password;
-    Set<RoleRequest> roleRequests;
 }

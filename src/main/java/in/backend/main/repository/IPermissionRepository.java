@@ -1,7 +1,6 @@
 package in.backend.main.repository;
 
 import in.backend.main.enity.Permission;
-import in.backend.main.service.IGeneralService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
