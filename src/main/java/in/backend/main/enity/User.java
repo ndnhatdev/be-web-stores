@@ -1,22 +1,26 @@
 package in.backend.main.enity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "users")
+@Table(name = "user_tbl")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
 
     @Column(unique = true, nullable = false)
     String username;
@@ -27,12 +31,23 @@ public class User {
     String email;
     @Column(name = "create_at")
     LocalDateTime createAt;
+    LocalDateTime updateAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
             @JoinTable(
-                    name = "users_role",
-                    joinColumns = @JoinColumn(name = "users_id"),
-                    inverseJoinColumns = @JoinColumn(name = "roles_id")
+                    name = "user_role",
+                    joinColumns = @JoinColumn(name = "user_id"),
+                    inverseJoinColumns = @JoinColumn(name = "role_id")
             )
     Set<Role> roles;
+
+    @PrePersist
+    protected void onCreate() {
+        createAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateAt = LocalDateTime.now();
+    }
 }
