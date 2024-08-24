@@ -16,6 +16,9 @@ import java.util.List;
 @Table(name = "permission_tbl")
 public class Permission {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
+
     String name;
     String description;
 

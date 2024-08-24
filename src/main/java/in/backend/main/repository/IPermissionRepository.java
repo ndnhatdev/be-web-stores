@@ -10,4 +10,5 @@ import java.util.Set;
 @Repository
 public interface IPermissionRepository extends JpaRepository<Permission, String> {
     boolean existsByName(String name);
+    Optional<Permission> findByName(String name);
 }
