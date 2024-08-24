@@ -12,6 +12,4 @@ public interface IRoleMapper {
     Role toRole(RoleRequest request);
 
     RoleResponse toRoleResponse(Role role);
-
-
 }

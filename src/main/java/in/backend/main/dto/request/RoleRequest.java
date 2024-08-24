@@ -3,6 +3,8 @@ package in.backend.main.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,4 +13,5 @@ import lombok.experimental.FieldDefaults;
 public class RoleRequest {
     String name;
     String description;
+    Set<String> permissions;
 }
