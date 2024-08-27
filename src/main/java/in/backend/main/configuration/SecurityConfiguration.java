@@ -21,7 +21,8 @@ import org.springframework.web.filter.CorsFilter;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     private final String[] PUBLIC_ENDPOINTS_POST = {
-        "/auth/**"
+            "users/register",
+            "/auth/**"
     };
 
     private final String[] PUBLIC_ENDPOINTS_GET = {
