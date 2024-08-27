@@ -4,6 +4,7 @@ import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.SignedJWT;
 import in.backend.main.dto.request.AuthenticationRequest;
 import in.backend.main.dto.request.IntrospectRequest;
+import in.backend.main.dto.request.LogoutRequest;
 import in.backend.main.dto.request.RefreshRequest;
 import in.backend.main.dto.response.AuthenticationResponse;
 import in.backend.main.dto.response.IntrospectResponse;
@@ -16,4 +17,5 @@ public interface IAuthenticationService {
     IntrospectResponse introspect(IntrospectRequest request) throws JOSEException, ParseException;
     AuthenticationResponse authenticate(AuthenticationRequest request);
     AuthenticationResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException;
+    String logout(LogoutRequest request) throws JOSEException, ParseException;
 }

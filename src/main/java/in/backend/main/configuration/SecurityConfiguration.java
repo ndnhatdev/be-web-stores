@@ -21,9 +21,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     private final String[] PUBLIC_ENDPOINTS_POST = {
-            "/users",
-            "/auth/token",
-            "/auth/introspect"
+        "/auth/**"
     };
 
     private final String[] PUBLIC_ENDPOINTS_GET = {
@@ -40,7 +38,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_POST).permitAll()
-                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS_GET).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS_GET).permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**","/swagger-ui.html").permitAll()
                 .anyRequest()
                 .authenticated());

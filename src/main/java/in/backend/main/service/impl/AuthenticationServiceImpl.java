@@ -7,6 +7,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import in.backend.main.dto.request.AuthenticationRequest;
 import in.backend.main.dto.request.IntrospectRequest;
+import in.backend.main.dto.request.LogoutRequest;
 import in.backend.main.dto.request.RefreshRequest;
 import in.backend.main.dto.response.AuthenticationResponse;
 import in.backend.main.dto.response.IntrospectResponse;
@@ -99,6 +100,22 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         var token = generateToken(user);
 
         return AuthenticationResponse.builder().token(token).authenticated(true).build();
+    }
+
+    @Override
+    public String logout(LogoutRequest request) throws JOSEException, ParseException{
+        try {
+            var token = verifyToken(request.getToken(), true);
+            String jit = token.getJWTClaimsSet().getJWTID();
+            Date expiryTime = token.getJWTClaimsSet().getExpirationTime();
+            InvalidateToken invalidateToken = InvalidateToken.builder().id(jit).expiryTime(expiryTime).build();
+            invalidateTokenRepository.save(invalidateToken);
+
+            return "Logout successful";
+        } catch (AppException e) {
+            log.info("token already expired");
+        }
+        return "Logout failed";
     }
 
 
