@@ -1,8 +1,6 @@
 package in.backend.main.enity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,7 +16,8 @@ import java.util.Date;
 @Table(name = "invalidate_token")
 public class InvalidateToken {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     String id;
-
+    String jit;
     Date expiryTime;
 }

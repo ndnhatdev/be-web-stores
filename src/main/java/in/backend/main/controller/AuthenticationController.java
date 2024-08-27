@@ -58,5 +58,4 @@ public class AuthenticationController {
                 .result(authenticationService.logout(logoutRequest))
                 .build();
     }
-
 }

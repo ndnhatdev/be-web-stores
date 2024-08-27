@@ -108,7 +108,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             var token = verifyToken(request.getToken(), true);
             String jit = token.getJWTClaimsSet().getJWTID();
             Date expiryTime = token.getJWTClaimsSet().getExpirationTime();
-            InvalidateToken invalidateToken = InvalidateToken.builder().id(jit).expiryTime(expiryTime).build();
+            InvalidateToken invalidateToken = InvalidateToken.builder().jit(jit).expiryTime(expiryTime).build();
             invalidateTokenRepository.save(invalidateToken);
 
             return "Logout successful";
